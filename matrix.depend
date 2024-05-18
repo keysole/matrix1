@@ -1,0 +1,49 @@
+# depslib dependency file v1.0
+1716035073 source:/home/keysole/labs/matrix/matrix/main.c
+	<stdio.h>
+	<stdlib.h>
+	"matrix.h"
+	"matrix_op.h"
+	"matrix_init.h"
+	"matrix_task.h"
+
+1716035060 /home/keysole/labs/matrix/matrix/matrix.h
+
+1716035038 source:/home/keysole/labs/matrix/matrix/matrix.c
+	<stdlib.h>
+	<stdio.h>
+	"matrix.h"
+	"matrix_op.h"
+	"matrix_init.h"
+	<math.h>
+
+1716035030 /home/keysole/labs/matrix/matrix/matrix_op.h
+	"matrix.h"
+
+1716035092 source:/home/keysole/labs/matrix/matrix/matrix_op.c
+	<stdlib.h>
+	<stdio.h>
+	"matrix_op.h"
+	"matrix.h"
+	<math.h>
+
+1716025268 /home/keysole/labs/matrix/matrix/matrix_init.h
+
+1716025257 source:/home/keysole/labs/matrix/matrix/matrix_init.c
+	<stdlib.h>
+	<stdio.h>
+	"matrix.h"
+	"matrix_op.h"
+	<math.h>
+
+1716034943 source:/home/keysole/labs/matrix/matrix/matrix_task.c
+	<stdlib.h>
+	<stdio.h>
+	"matrix.h"
+	"matrix_op.h"
+	"matrix_init.h"
+	<math.h>
+
+1716034923 /home/keysole/labs/matrix/matrix/matrix_task.h
+	"matrix.h"
+
