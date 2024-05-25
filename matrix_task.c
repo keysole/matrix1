@@ -61,10 +61,10 @@ matrix *matrix_task_gauss(matrix * matrix1, matrix * vals, matrix * sols, size_t
         }
 
 
-
-    for (int k = n-1; k >= 0; k--) {
+    int n_i = (int) n;
+    for (int k = n_i-1; k >= 0; k--) {
         double sum = 0;
-        for (int l = k+1; l < n; l++) {
+        for (int l = k+1; l < n_i; l++) {
             sum += matrix_get(matrix1, k, l) * matrix_get(sols, l, 0);
         }
         double sol_val = (matrix_get(vals, k, 0) - sum) / matrix_get(matrix1, k, k);

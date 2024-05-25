@@ -59,7 +59,7 @@ int main()
 
 
     printf("-------------------\n");
-    printf("Term matrix %lf\n");
+    printf("Term matrix\n");
     matrix_print(term_matrix);
     printf("-------------------\n");
     sols_matrix = matrix_task_gauss(test_matrix, term_matrix, sols_matrix, n);
@@ -91,5 +91,6 @@ int main()
     matrix_free(test_exp_matrix);
     matrix_free(term_matrix);
     matrix_free(sols_matrix);
+    matrix_free(product);
     return 0;
 }
