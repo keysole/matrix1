@@ -11,6 +11,10 @@ void matrix_print(matrix *matrix);
 
 matrix * matrix_resize (struct matrix *m, size_t h, size_t w);
 
+matrix *matrix_transpose_sqr(matrix *matrix);
+;
+matrix *matrix_transpose_sqr_in_place(matrix *matrix);
+
 double matrix_get (matrix *m, size_t i, size_t j);
 
 void matrix_set(matrix *m, size_t i, size_t j, double x);

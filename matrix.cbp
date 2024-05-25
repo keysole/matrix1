@@ -40,6 +40,18 @@
 		<Unit filename="matrix.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
+		<Unit filename="matrix_init.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="matrix_init.h" />
+		<Unit filename="matrix_op.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="matrix_op.h" />
+		<Unit filename="matrix_task.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="matrix_task.h" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>

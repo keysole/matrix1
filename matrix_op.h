@@ -14,6 +14,7 @@ matrix * matrix_op_add_rows(matrix *matrix, size_t i_1, size_t i_2, double facto
 matrix * matrix_op_swap_rows(matrix *matrix, size_t i_1, const size_t i_2);
 
 double matrix_op_norm(matrix * matrix);
+double matrix_op_det(matrix * matrix);
 
 
 #endif // MATRIX_OP_H_INCLUDED

@@ -10,6 +10,7 @@ int main()
     const double eps = 0.0001;
     size_t n = 3;
     matrix * test_matrix = matrix_alloc(n, n);
+    matrix * test_matrix2 = matrix_alloc(n, n);
     matrix * test_exp_matrix = matrix_alloc(n, n);
     matrix * term_matrix = matrix_alloc(n, 1);
     matrix * sols_matrix = matrix_alloc(n, 1);
@@ -19,16 +20,31 @@ int main()
     for (size_t i = 0; i < n; ++i){
         for (size_t j = 0; j < n; ++j){
         matrix_set(test_matrix, i, j, test_matrix_3_x_3[i][j]);
+        matrix_set(test_matrix2, i, j, test_matrix_3_x_3[i][j]);
         matrix_set(test_exp_matrix, i, j, test_exp_matrix_3_x_3[i][j]);
     }
 }
+
+    printf("-------------------\n");
+    printf("Matrix test \n");
+    matrix_print(test_matrix);
+    printf("-------------------\n");
+
+
+
+    printf("-------------------\n");
+    printf("Matrix test exp \n");
+    matrix_print(test_exp_matrix);
+    printf("-------------------\n");
+
+
     printf("-------------------\n");
     printf("Matrix norm %lf\n", matrix_op_norm(test_matrix));
     printf("-------------------\n");
 
     matrix * product = matrix_op_multiply(test_matrix, test_exp_matrix);
     printf("-------------------\n");
-    printf("Product matrix\n");
+    printf("Product matrix (exp * test) \n");
     matrix_print(product);
     printf("-------------------\n");
 
@@ -41,6 +57,11 @@ int main()
     }
 
 
+
+    printf("-------------------\n");
+    printf("Term matrix %lf\n");
+    matrix_print(term_matrix);
+    printf("-------------------\n");
     sols_matrix = matrix_task_gauss(test_matrix, term_matrix, sols_matrix, n);
     printf("-------------------\n");
     printf("Solution matrix\n");
@@ -54,5 +75,21 @@ int main()
     matrix_print(test_exp_matrix);
     printf("-------------------\n");
 
+
+    printf("-------------------\n");
+    printf("Matrix det\n %lf", matrix_op_det(test_matrix));
+    printf("-------------------\n");
+
+
+    printf("-------------------\n");
+    printf("Matrix inv\n");
+    matrix_print(matrix_op_inverse(test_matrix2));
+    printf("\n-------------------\n");
+
+    matrix_free(test_matrix);
+    matrix_free(test_matrix2);
+    matrix_free(test_exp_matrix);
+    matrix_free(term_matrix);
+    matrix_free(sols_matrix);
     return 0;
 }

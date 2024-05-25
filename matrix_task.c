@@ -58,7 +58,6 @@ matrix *matrix_task_gauss(matrix * matrix1, matrix * vals, matrix * sols, size_t
             }
             }
 
-
         }
 
 

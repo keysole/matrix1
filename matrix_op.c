@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "matrix_op.h"
 #include "matrix.h"
+#include "matrix_init.h"
 #include <math.h>
 
 struct matrix {
@@ -98,6 +99,80 @@ matrix * matrix_op_swap_rows(matrix *matrix, size_t i_1, const size_t i_2)
 
     }
     return matrix;
+}
+
+matrix *matrix_op_upper_triang(matrix * matrix){
+    for (size_t j = 0; j < matrix->rows; ++j) {
+        for (size_t i = 0; i < matrix->rows; ++i) {
+            if (i > j){
+                double factor = matrix_get(matrix, i, j) / matrix_get(matrix, j, j);
+                matrix_op_add_rows(matrix, i, j, -factor);
+
+            }
+            }
+
+
+        }
+
+    return matrix;
+}
+
+
+matrix *matrix_op_inverse(matrix * matrix){
+    if (matrix->rows != matrix->cols)
+        return NULL;
+    struct matrix * inv = matrix_alloc_identity(matrix->cols);
+
+      for (size_t j = 0; j < matrix->rows; ++j) {
+        for (size_t i = 0; i < matrix->rows; ++i) {
+            if (i > j){
+                double factor = matrix_get(matrix, i, j) / matrix_get(matrix, j, j);
+                matrix_op_add_rows(inv, i, j, -factor);
+                matrix_op_add_rows(matrix, i, j, -factor);
+
+            }
+            }
+
+
+        }
+
+
+    for (size_t j = 0; j < matrix->rows; ++j) {
+        for (size_t i = 0; i < matrix->cols; ++i) {
+            if (j > i){
+                double factor = matrix_get(matrix, i, j) / matrix_get(matrix, j, j);
+                matrix_op_add_rows(inv, i, j, -factor);
+                matrix_op_add_rows(matrix, i, j, -factor);
+
+            }
+            }
+
+        }
+
+    for (size_t n = 0; n < matrix->rows; ++n) {
+        if (fabs(matrix_get(matrix, n, n) - 0.0001) == 0.0){
+            printf("Error, matrix is not invertible\n");
+            return NULL;
+            }
+        double factor = 1.0 / matrix_get(matrix, n, n);
+        matrix_op_mult_row(inv, n, factor);
+        matrix_op_mult_row(matrix, n, factor);
+    }
+
+
+    return inv;
+}
+
+
+double matrix_op_det(matrix * matrix){
+    if (matrix->cols != matrix->rows)
+        return 0;
+    matrix = matrix_op_upper_triang(matrix);
+    double det = 1.0;
+    for (size_t i = 0; i < matrix->cols; ++i){
+        det *= matrix_get(matrix, i, i);
+    }
+    return det;
 }
 
 double matrix_op_norm(matrix * matrix){

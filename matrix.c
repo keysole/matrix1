@@ -72,18 +72,47 @@ int same_size(matrix * matrix_1, matrix * matrix_2){
 }
 
 
-//matrix *matrix_transpose(matrix *matrix)
-//{
-  //  size_t rows = matrix->cols;
-    //size_t cols = matrix->rows;
-    //for (size_t i = 0; i < rows; ++i)
-    //{
-      //  for (size_t j = 0; j < cols; ++j)
-        //{
-          //  matrix_set(matrix, i, j, matrix_get(matrix, j, i));
-        //}
-  //  }
-//}
+matrix *matrix_transpose_sqr(matrix *matrix)
+{
+   size_t rows = matrix->cols;
+   size_t cols = matrix->rows;
+   struct matrix * matrix_t = matrix_alloc(rows, cols);
+   if (rows != cols)
+        return NULL;
+    for (size_t i = 0; i < rows; ++i)
+    {
+        for (size_t j = 0; j < cols; ++j)
+            {
+            double temp = matrix_get(matrix, i, j);
+
+            matrix_set(matrix_t, i, j, matrix_get(matrix, j, i));
+            matrix_set(matrix_t, j, i, temp);
+            }
+            }
+    return matrix_t;
+}
+
+
+
+
+matrix *matrix_transpose_sqr_in_place(matrix *matrix)
+{
+   size_t rows = matrix->cols;
+   size_t cols = matrix->rows;
+   if (rows != cols)
+        return NULL;
+    for (size_t i = 0; i < rows; ++i)
+    {
+        for (size_t j = 0; j < cols; ++j)
+            {
+            double temp = matrix_get(matrix, i, j);
+
+            matrix_set(matrix, i, j, matrix_get(matrix, j, i));
+            matrix_set(matrix, j, i, temp);
+            }
+            }
+    return matrix;
+}
 
 
 
