@@ -12,7 +12,27 @@ struct matrix {
 };
 
 
+
 matrix *matrix_op_add(matrix * matrix_1, matrix * matrix_2)
+{
+    if (!same_size(matrix_1, matrix_2))
+        return NULL;
+    size_t rows = matrix_1->rows;
+    size_t cols = matrix_2->cols;
+    for (size_t i = 0; i < rows; i++)
+    {
+        for (size_t j = 0; j < cols; j++)
+        {
+            double a = matrix_get(matrix_1, i, j);
+            double b = matrix_get(matrix_2, i, j);
+            matrix_set(matrix_1, i, j, a + b);
+        }
+    }
+    return matrix_1;
+}
+
+
+matrix *matrix_op_sum(matrix * matrix_1, matrix * matrix_2)
 {
     if (!same_size(matrix_1, matrix_2))
         return NULL;
@@ -31,7 +51,7 @@ matrix *matrix_op_add(matrix * matrix_1, matrix * matrix_2)
     return sum;
 }
 
-matrix *matrix_op_multiply(matrix *matrix_1, matrix *matrix_2)
+matrix *matrix_op_mult_alloc(matrix *matrix_1, matrix *matrix_2)
 {
     if (matrix_1->cols != matrix_2->rows)
     {
@@ -55,6 +75,44 @@ matrix *matrix_op_multiply(matrix *matrix_1, matrix *matrix_2)
     }
     return product;
 }
+
+matrix *matrix_op_mult(matrix *matrix_1, matrix *matrix_2)
+{
+    if (matrix_1->cols != matrix_2->rows)
+    {
+        return NULL;
+    }
+    size_t m = matrix_1->rows;
+    size_t n = matrix_1->cols;
+    size_t p = matrix_2->cols;
+    struct matrix *temp = matrix_alloc(m, p);
+    for (size_t i = 0; i < m; i++)
+    {
+        for (size_t j = 0; j < p; j++)
+        {
+            double sum = 0;
+            for (size_t k = 0; k < n; k++)
+            {
+                sum += matrix_get(matrix_1, i, k) * matrix_get(matrix_2, k, j);
+            }
+            matrix_set(temp, i, j, sum);
+        }
+
+    }
+    matrix_1 = matrix_resize(matrix_1, m, p);
+    for (size_t i = 0; i < m; i++)
+    {
+        for (size_t j = 0; j < p; j++)
+        {
+            matrix_set(matrix_1, i, j, matrix_get(temp, i, j));
+
+        }
+    }
+
+    return matrix_1;
+}
+
+
 
 matrix * matrix_op_scalar_multiply(matrix *matrix, double x)
 {

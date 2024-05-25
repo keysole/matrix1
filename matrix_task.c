@@ -28,7 +28,7 @@ matrix * matrix_task_exponent(matrix * matrix, const double eps){
   while (norm >= eps){
         n++;
         exp = matrix_op_add(exp, term_next);
-        struct matrix * temp = matrix_op_multiply(term_next, matrix);
+        struct matrix * temp = matrix_op_mult_alloc(term_next, matrix);
         double mult = 1.0 / (double) n;
         temp = matrix_op_scalar_multiply(temp, mult);
         term_prev = matrix_clone(term_next);
