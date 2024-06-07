@@ -66,8 +66,10 @@ int main()
    // sols_matrix = matrix_task_gauss(test_matrix, term_matrix, sols_matrix, n);
     sols_matrix = matrix_task_gauss(matrix_inp, term_matrix_inp, sols_matrix, k);
     printf("-------------------\n");
+    if (sols_matrix != NULL){
     printf("Solution matrix\n");
     matrix_print(sols_matrix);
+    }
     printf("-------------------\n");
 
     printf("Введите размер квадратной матрицы (экспонента) \n");

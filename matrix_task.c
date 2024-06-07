@@ -50,13 +50,13 @@ matrix *matrix_task_gauss(matrix * matrix1, matrix * vals, matrix * sols, size_t
         for (size_t i = 0; i < n; ++i) {
             if (i > j){
                 double val = matrix_get(matrix1, j, j);
-                int k = j + 1;
+                size_t k = j + 1;
                 while (fabs(val) <= 0.0001 && k < n){
                     matrix_op_swap_rows(matrix1, j, k);
                     k++;
                     val = matrix_get(matrix1, j, j);
                 }
-                if (fabs(val) <= 0.0001 || k == n){
+                if (fabs(val) <= 0.0001){
                     printf("Error, matrix is not invertible\n");
                     return NULL;
                     }
