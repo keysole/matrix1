@@ -117,15 +117,6 @@ int main()
 
 
 
-    //test_exp_matrix = matrix_task_exponent(test_exp_matrix, eps);
-    matrix_exp_inp = matrix_task_exponent(matrix_exp_inp, eps);
-    printf("-------------------\n");
-    printf("Exp matrix\n");
-    //matrix_print(test_exp_matrix);
-    matrix_print(matrix_exp_inp);
-    printf("-------------------\n");
-
-
     printf("-------------------\n");
     printf("Matrix det\n %lf", matrix_op_det(test_matrix));
     printf("-------------------\n");
@@ -140,9 +131,10 @@ int main()
     matrix_free(test_matrix2);
     matrix_free(test_exp_matrix);
     matrix_free(term_matrix);
-    matrix_free(sols_matrix);
-    matrix_free(product);
     matrix_free(matrix_inp);
     matrix_free(term_matrix_inp);
+    matrix_free(sols_matrix);
+    matrix_free(matrix_exp_inp);
+    matrix_free(product);
     return 0;
 }

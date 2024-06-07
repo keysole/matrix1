@@ -26,7 +26,7 @@ void matrix_print(matrix *matrix)
 }
 
 matrix* matrix_alloc (size_t rows, size_t cols){
-    matrix *matrix = malloc(sizeof(matrix));
+    matrix *matrix = malloc(sizeof(*matrix));
     if (!matrix) {
         return NULL;
     }

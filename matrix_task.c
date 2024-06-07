@@ -47,10 +47,19 @@ matrix * matrix_task_exponent(matrix * matrix, const double eps){
 matrix *matrix_task_gauss(matrix * matrix1, matrix * vals, matrix * sols, size_t n){
     for (size_t j = 0; j < n; ++j) {
         //int pivot_row = j;
-
-
         for (size_t i = 0; i < n; ++i) {
             if (i > j){
+                double val = matrix_get(matrix1, j, j);
+                int k = j + 1;
+                while (fabs(val) <= 0.0001 && k < n){
+                    matrix_op_swap_rows(matrix1, j, k);
+                    k++;
+                    val = matrix_get(matrix1, j, j);
+                }
+                if (fabs(val) <= 0.0001 || k == n){
+                    printf("Error, matrix is not invertible\n");
+                    return NULL;
+                    }
                 double factor = matrix_get(matrix1, i, j) / matrix_get(matrix1, j, j);
                 matrix_set(vals, i, 0, matrix_get(vals, i, 0) - factor * matrix_get(vals, j, 0));
                 matrix_op_add_rows(matrix1, i, j, -factor);
