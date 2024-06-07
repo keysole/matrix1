@@ -217,8 +217,9 @@ matrix *matrix_op_inverse(matrix * matrix){
         matrix_op_mult_row(matrix, n, factor);
     }
 
-
-    return inv;
+    matrix = matrix_assign(matrix, inv);
+    matrix_free(inv);
+    return matrix;
 }
 
 
