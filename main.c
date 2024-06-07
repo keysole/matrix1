@@ -67,8 +67,8 @@ int main()
     sols_matrix = matrix_task_gauss(matrix_inp, term_matrix_inp, sols_matrix, k);
     printf("-------------------\n");
     if (sols_matrix != NULL){
-    printf("Solution matrix\n");
-    matrix_print(sols_matrix);
+        printf("Solution matrix\n");
+        matrix_print(sols_matrix);
     }
     printf("-------------------\n");
 
@@ -85,11 +85,11 @@ int main()
     }
 }
     //test_exp_matrix = matrix_task_exponent(test_exp_matrix, eps);
-    matrix_exp_inp = matrix_task_exponent(matrix_exp_inp, eps);
+    matrix * matrix_exp_res = matrix_task_exponent(matrix_exp_inp, eps);
     printf("-------------------\n");
     printf("Exp matrix\n");
     //matrix_print(test_exp_matrix);
-    matrix_print(matrix_exp_inp);
+    matrix_print(matrix_exp_res);
     printf("-------------------\n");
 
 //printf("-------------------\n");
@@ -138,5 +138,6 @@ int main()
     matrix_free(sols_matrix);
     matrix_free(matrix_exp_inp);
     matrix_free(product);
+    matrix_free(matrix_exp_res);
     return 0;
 }

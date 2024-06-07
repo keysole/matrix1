@@ -73,18 +73,18 @@ matrix * matrix_assign(matrix *matrix_1, matrix *matrix_2){
     return matrix_1;
 }
 
-matrix * matrix_clone (matrix * matrix){
+matrix * matrix_clone (matrix * matrix1, matrix * matrix2){
     size_t rows, cols;
-    rows = matrix->rows;
-    cols = matrix->cols;
-    struct matrix * clone = matrix_alloc(rows, cols);
+    rows = matrix1->rows;
+    cols = matrix1->cols;
+   // struct matrix * clone = matrix_alloc(rows, cols);
     for (size_t i = 0; i < rows; ++i)
     {
         for (size_t j = 0; j < cols; ++j)
         {
-            matrix_set(clone, i, j, matrix_get(matrix, i, j));
+            matrix_set(matrix1, i, j, matrix_get(matrix2, i, j));
         }
     }
-    return clone;
+    return matrix1;
 
 }

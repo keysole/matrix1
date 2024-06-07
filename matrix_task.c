@@ -20,25 +20,41 @@ matrix * matrix_task_exponent(matrix * matrix, const double eps){
     int n = 1;
     term_prev = matrix_alloc_identity(rows);
     exp = matrix_alloc(rows, cols);
-    exp = matrix_clone(term_prev);
-    term_next = matrix_clone(matrix);
+    exp = matrix_assign(exp, term_prev);
+    term_next = matrix_alloc(rows, cols);
+    term_next = matrix_assign(term_next, matrix);
 
     double norm = matrix_op_norm(term_next);
+   matrix_print(term_next);
+ //  printf("norm %lf\n", norm);
+
+   //exp A = E + A + A^2/2 +...+ A^n/n! +... = a0 + a1 + ... + an +...
+//a0 = E
+//an = a_{n-1} * A / n
+
 
   while (norm >= eps){
+       // printf("norm %lf\n", norm);
         n++;
         exp = matrix_op_add(exp, term_next);
+     //   if (n > 5)
+     //       break;
         struct matrix * temp = matrix_op_mult_alloc(term_next, matrix);
+        //temp = matrix_op_mult_alloc(term_next, matrix);
         double mult = 1.0 / (double) n;
         temp = matrix_op_scalar_multiply(temp, mult);
-        term_prev = matrix_clone(term_next);
-        term_next = matrix_clone(temp);
-        matrix_free(temp);
+        term_prev = matrix_assign(term_prev, term_next);
+        term_next = matrix_assign(term_next, temp);
+        matrix_print(term_next);
         norm = matrix_op_norm(term_next);
+        //matrix_free(term_next);
+        //matrix_free(term_prev);
+        matrix_free(temp);
 
     }
     matrix_free(term_next);
     matrix_free(term_prev);
+    //matrix_free(temp);
     return exp;
 
 }
@@ -53,6 +69,7 @@ matrix *matrix_task_gauss(matrix * matrix1, matrix * vals, matrix * sols, size_t
                 size_t k = j + 1;
                 while (fabs(val) <= 0.0001 && k < n){
                     matrix_op_swap_rows(matrix1, j, k);
+                    matrix_op_swap_rows(vals, j, k);
                     k++;
                     val = matrix_get(matrix1, j, j);
                 }
